@@ -1,10 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 import { useRoutes } from "react-router-dom";
-
-import Layout from './components/shop/layout/Layout';
-import Home from './components/shop/components/home/Home';
+import Auth from "./shop/pages/auth/auth";
+import Layout from "./shop/layout/Layout";
+import Home from "./shop/pages/home/Home";
+import SignInForm from "./shop/components/auth/Signin"
+import SignUpForm from "./shop/components/auth/Singup"
 
 function App() {
   let element = useRoutes([
@@ -16,10 +18,18 @@ function App() {
           path: "/",
           element: <Home />,
         },
-        { path: "tasks", element:"" },
+        {
+          path: "auth",
+          element: <Auth />,
+          children:[
+            {path: "/auth/sign-up", element:<SignUpForm/>},
+            {path: "/auth/sign-in", element:<SignInForm/>},
+            
+          ]
+        },
       ],
     },
-    { path: "team", element:""},
+    { path: "auth", element: "" },
   ]);
 
   return element;
